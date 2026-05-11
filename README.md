@@ -111,7 +111,7 @@ You can add any number of directories and WLX will recursively scan and index al
 After adding the wordlists to the config just do the following to scan and index the directories
 
 ```bash
-wlx config scan 
+wlx config index 
 ```
 
 <img src="docs/gifs/wlx-quick-start.gif" alt="WLX Scan">

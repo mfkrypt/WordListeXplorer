@@ -100,7 +100,7 @@ This command displays every directory currently registered with WLX for indexing
 WLX stores indexed wordlists locally inside its SQLite database for fast and efficient searching. After adding your wordlist directories, run a scan to index all files into the WLX database:
 
 ```bash
-wlx config scan
+wlx config index
 ```
 
 WLX will recursively process all configured directories and add supported wordlists to the local index. Depending on the size of your collections, the initial scan may take some time.
