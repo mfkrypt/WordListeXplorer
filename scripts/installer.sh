@@ -16,6 +16,9 @@ RESET="\033[0m"
 
 
 # Paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
 WLX_DIR="$HOME/.wlx"
 WLX_VENV="$WLX_DIR/venv"
 LOCAL_BIN="$HOME/.local/bin"
@@ -29,12 +32,12 @@ echo -e "${CYAN}              v${VERSION}${RESET}"
 echo -e "${CYAN}========================================${RESET}"
 echo
 
-#Sudo prevention
+
+# Prevent sudo
 if [ "$EUID" -eq 0 ]; then
     echo -e "${RED}[!] Please do not run this installer with sudo.${RESET}"
     exit 1
 fi
-
 
 
 # Dependency Checks
@@ -42,6 +45,11 @@ echo -e "${CYAN}[*] Checking system requirements...${RESET}"
 
 if ! command -v python3 &>/dev/null; then
     echo -e "${RED}[!] Python3 is not installed.${RESET}"
+    exit 1
+fi
+
+if ! command -v git &>/dev/null; then
+    echo -e "${RED}[!] Git is not installed.${RESET}"
     exit 1
 fi
 
@@ -79,9 +87,13 @@ esac
 echo -e "${GREEN}[+] Detected shell:${RESET} $CURRENT_SHELL"
 
 
-# Create WLX Directory
+# Create WLX Directories
 mkdir -p "$WLX_DIR"
 mkdir -p "$LOCAL_BIN"
+
+
+# Store Installation Path
+echo "$PROJECT_ROOT" > "$WLX_DIR/install_path"
 
 
 # Create Virtual Environment
@@ -118,12 +130,10 @@ pip install --upgrade pip >/dev/null
 
 
 # Install WLX
-
-
 echo
 echo -e "${CYAN}[*] Installing WLX...${RESET}"
 
-if ! pip install ..; then
+if ! pip install "$PROJECT_ROOT"; then
 
     echo
     echo -e "${RED}[!] Failed to install WLX.${RESET}"
@@ -147,7 +157,6 @@ ln -sf "$WLX_VENV/bin/wlx" "$LOCAL_BIN/wlx"
 echo -e "${GREEN}[+] WLX command linked globally.${RESET}"
 
 
-
 # PATH Setup
 LOCAL_BIN_EXPORT='export PATH="$HOME/.local/bin:$PATH"'
 
@@ -167,7 +176,6 @@ if ! grep -q "$LOCAL_BIN_EXPORT" "$SHELL_RC"; then
         echo -e "${YELLOW}[-] Skipping PATH setup.${RESET}"
     fi
 fi
-
 
 
 # WLX Shell Integration
@@ -216,27 +224,19 @@ EOF
 fi
 
 
-# Output
+# Installation Complete
 echo
 echo -e "${GREEN}[+] WLX installation completed successfully.${RESET}"
 
 echo
 echo -e "${CYAN}[*] Reload your shell:${RESET}"
 echo
-echo "    source $SHELL_RC"
+echo "    exec \$SHELL"
 
 echo
 echo -e "${CYAN}[*] Verify installation:${RESET}"
 echo
 echo "    wlx --help"
-
-echo
-echo -e "${CYAN}[*] Example Workflow:${RESET}"
-echo
-echo "    wlx scan"
-echo "    wlx search admin"
-echo "    wlxuse 12 USERNAME"
-echo "    echo \$USERNAME"
 
 echo
 echo -e "${GREEN}[+] Welcome to WLX.${RESET}"
