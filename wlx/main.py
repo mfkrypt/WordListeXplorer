@@ -12,7 +12,7 @@ import urllib.request
 import typer
 import os
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 VERSION_URL = "https://raw.githubusercontent.com/ZeroPrime9/WordListeXplorer/main/VERSION"
 
 
@@ -132,7 +132,7 @@ def scan(directory: str = None):
     scanned_directories = 0
 
     console.print(
-        "[bold cyan][*] Starting WLX scan...[/bold cyan]"
+        "[bold cyan][*] Starting WLX Indexer...[/bold cyan]"
     )
 
     console.print(

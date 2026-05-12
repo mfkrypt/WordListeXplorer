@@ -3,6 +3,11 @@
 All notable changes to WordListeXplorer (WLX) will be documented in this file.
 
 ---
+# [1.0.1]
+
+- Refactoring of Code Naming Convention
+- Changing command name to match
+- Updating Readme.md
 
 # [1.0.0] 
 
