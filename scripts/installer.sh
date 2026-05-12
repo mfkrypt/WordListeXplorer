@@ -4,7 +4,7 @@ set -e
 
 
 # WLX Production Installer
-VERSION="1.0.0"
+VERSION="1.0.1"
 
 
 # Colors
