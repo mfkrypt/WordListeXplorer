@@ -17,3 +17,4 @@ dist/
 
 # WLX Runtime
 .wlx/
+WordListeXplorer_WLX.egg-info/
