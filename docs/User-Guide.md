@@ -438,7 +438,7 @@ as it is not a valid command
 If searches return no results or the database has not been created yet, run a scan to generate and populate the local index:
 
 ```bash
-wlx scan
+wlx config index
 ```
 Ensure that at least one directory has been added before scanning.
 
