@@ -72,7 +72,7 @@ View the documentation to read through all the features & troubleshooting of WLX
 
 ```bash
 git clone https://github.com/ZeroPrime9/WordListeXplorer.git
-cd WordListeXplorer/wlx/scripts
+cd WordListeXplorer/scripts
 ```
 
 ## Run Installer
